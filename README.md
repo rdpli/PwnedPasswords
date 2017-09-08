@@ -6,7 +6,7 @@ This library checks for hacked passwords using [Pwned Passwords](https://haveibe
 - [Usage](#usage)
 - [Links](#links)
 ## Download
-[![](https://jitpack.io/v/RandomAdversary/PwnedPasswords.svg)](https://jitpack.io/#RandomAdversary/PwnedPasswords)
+[![](https://jitpack.io/v/RandomAdversary/PwnedPasswords.svg)](https://jitpack.io/#RandomAdversary/PwnedPasswords/1.0)
 
 ### Maven
 To use it in your Maven build add:
