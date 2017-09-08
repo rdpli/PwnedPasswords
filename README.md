@@ -1,5 +1,6 @@
 # PwnedPasswords
-Checks for hacked passwords using have I been pwned API
+Pwned Passwords are hundreds of millions of real world passwords exposed in data breaches. This exposure makes them unsuitable for ongoing use as they're at much greater risk of being used to take over other accounts.
+This library checks for hacked passwords using [Pwned Passwords](https://haveibeenpwned.com/Passwords) service provided by [Have I been pwned?](https://haveibeenpwned.com/About).
 # Table of content
 - [Download](#download)
 - [Usage](#usage)
