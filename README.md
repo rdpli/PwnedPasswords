@@ -1,6 +1,9 @@
 # PwnedPasswords
 Checks for hacked passwords using have I been pwned API
-
+# Table of content
+- [Download](#download)
+- [Usage](#usage)
+- [Links](#links)
 ## Download
 [![](https://jitpack.io/v/RandomAdversary/PwnedPasswords.svg)](https://jitpack.io/#RandomAdversary/PwnedPasswords)
 
@@ -44,3 +47,30 @@ Add the dependency
 
 
 ## Usage
+PwnedPasswords.pwn() will send the password directly to the api.
+```java
+        String myPassword = "admin";
+        boolean pwned = PwnedPasswords.pwn(myPassword);
+        if(pwned){
+            System.out.println( "Oh no — pwned!");
+        }
+        else {
+            System.out.println("Good news — no pwnage found!");
+        }
+```
+PwnedPasswords.hashAndPwn() will send hash(SHA1) instead of plaintext to the api.
+
+```java
+        String myPassword = "admin";
+        boolean pwned = PwnedPasswords.hashAndPwn(myPassword);
+        if(pwned){
+            System.out.println( "Oh no — pwned!");
+        }
+        else {
+            System.out.println("Good news — no pwnage found!");
+        }
+```
+
+# Links
+* [Pwned Passwords web service](https://haveibeenpwned.com/Passwords)
+* [Pwned Passwords API](https://haveibeenpwned.com/API/v2#PwnedPasswords)
