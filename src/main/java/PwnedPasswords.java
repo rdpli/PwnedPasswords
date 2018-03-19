@@ -111,7 +111,7 @@ public class PwnedPasswords {
     }
     
     private static int requestPwnStatusA(String account) throws IOException {
-        URL obj = new URL(apiBaseURL + apiVersion + apiPwnedPasswordURL);
+        URL obj = new URL(apiBaseURL + apiVersion + apiPwnedAccountURL);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
         //add request header
