@@ -59,7 +59,7 @@ public class PwnedPasswords {
             throw new RateLimitException("Too many requests — the rate limit has been exceeded.\nLearn more at https://haveibeenpwned.com/API/v2#RateLimiting");
 
         if (responseCode == 400)
-            throw new BadRequestException("Bad request — the password does not comply with an acceptable format.");
+            throw new BadRequestException("Bad request — the account does not comply with an acceptable format.");
 
         if (responseCode != 200 && responseCode != 404)
             throw new UnknownResponseCode("Sorry, something went wrong.\nHttp status code of the response: " + responseCode);
