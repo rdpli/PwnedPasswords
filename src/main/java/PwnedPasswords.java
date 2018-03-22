@@ -88,7 +88,7 @@ public class PwnedPasswords {
         for (int i = 0; i < result.length; i++) {
             sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
         }
-        return pwn(sb.toString());
+        return pwnPassword(sb.toString());
     }
 
     // Code shamelessly copied from https://www.mkyong.com/java/how-to-send-http-request-getpost-in-java/
