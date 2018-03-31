@@ -48,10 +48,10 @@ Add the dependency
 
 
 ## Usage
-PwnedPasswords.pwn() will send the password directly to the api.
+pwnPassword() will send the password directly to the api.
 ```java
         String myPassword = "admin";
-        boolean pwned = PwnedPasswords.pwn(myPassword);
+        boolean pwned = pwnPassword(myPassword);
         if(pwned){
             System.out.println( "Oh no — pwned!");
         }

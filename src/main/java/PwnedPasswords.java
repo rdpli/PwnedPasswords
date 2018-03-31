@@ -1,6 +1,6 @@
 import javax.net.ssl.HttpsURLConnection;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,10 +16,11 @@ public class PwnedPasswords {
     /**
      * Checks for hacked passwords using have I been pwned API.
      * Read more about the project at https://haveibeenpwned.com/About
-     * @param  password The password
+     *
+     * @param password The password
      * @return true if the password was found in the Pwned Passwords repository, false if  the password was not found in the Pwned Passwords repository.
      */
-    public static boolean pwn(String password) throws IOException, RateLimitException, BadRequestException, UnknownResponseCode {
+    public static boolean pwnPassword(String password) throws IOException, RateLimitException, BadRequestException, UnknownResponseCode {
         int responseCode = requestPwnStatus(password);
         if (responseCode == 200)
             return true;
@@ -43,7 +44,8 @@ public class PwnedPasswords {
      * Checks for hacked passwords using have I been pwned API.
      * The password is hashed(SHA1) and then sent to the API.
      * Read more about the project at https://haveibeenpwned.com/About
-     * @param  password The password
+     *
+     * @param password The password
      * @return true if the password was found in the Pwned Passwords repository, false if  the password was not found in the Pwned Passwords repository.
      */
     public static boolean hashAndPwn(String password) throws BadRequestException, NoSuchAlgorithmException, IOException, RateLimitException, UnknownResponseCode {
@@ -59,27 +61,21 @@ public class PwnedPasswords {
         for (int i = 0; i < result.length; i++) {
             sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
         }
-        return pwn(sb.toString());
+        return pwnPassword(sb.toString());
     }
 
 
-    // Code shamelessly copied from https://www.mkyong.com/java/how-to-send-http-request-getpost-in-java/
     private static int requestPwnStatus(String password) throws IOException {
-        URL obj = new URL(apiBaseURL + apiVersion + apiPwnedPasswordURL);
+        String URL = apiBaseURL + apiVersion + apiPwnedPasswordURL + password;
+        return makeGetRequest(URL);
+    }
+
+    // Code shamelessly copied from https://www.mkyong.com/java/how-to-send-http-request-getpost-in-java/
+    private static int makeGetRequest(String URL) throws IOException {
+        URL obj = new URL(URL);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
-        //add request header
-        con.setRequestMethod("POST");
+        con.setRequestMethod("GET");
         con.setRequestProperty("User-Agent", userAgent);
-        String urlParameters = "Password=" + password;
-
-        // Send post request
-        con.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(urlParameters);
-        wr.flush();
-        wr.close();
         return con.getResponseCode();
-
     }
 }
