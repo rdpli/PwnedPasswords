@@ -25,7 +25,7 @@ and the dependency:
 	<dependency>
 	    <groupId>com.github.RandomAdversary</groupId>
 	    <artifactId>PwnedPasswords</artifactId>
-	    <version>1.0</version>
+	    <version>2.0</version>
 	</dependency>
 ```
 ### Gradle
@@ -41,7 +41,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 ```
 	dependencies {
-	        compile 'com.github.RandomAdversary:PwnedPasswords:1.0'
+	        compile 'com.github.RandomAdversary:PwnedPasswords:2.0'
 	}
 
 ```
