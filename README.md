@@ -25,7 +25,7 @@ and the dependency:
 	<dependency>
 	    <groupId>com.github.RandomAdversary</groupId>
 	    <artifactId>PwnedPasswords</artifactId>
-	    <version>2.0</version>
+	    <version>3.0</version>
 	</dependency>
 ```
 ### Gradle
@@ -41,7 +41,7 @@ Add it in your root build.gradle at the end of repositories:
 Add the dependency
 ```
 	dependencies {
-	        compile 'com.github.RandomAdversary:PwnedPasswords:2.0'
+	        compile 'com.github.RandomAdversary:PwnedPasswords:3.0'
 	}
 
 ```
@@ -64,6 +64,24 @@ PwnedPasswords.hashAndPwn() will send hash(SHA1) instead of plaintext to the api
 ```java
         String myPassword = "admin";
         boolean pwned = PwnedPasswords.hashAndPwn(myPassword);
+        if(pwned){
+            System.out.println( "Oh no — pwned!");
+        }
+        else {
+            System.out.println("Good news — no pwnage found!");
+        }
+```
+PwnedPasswords.pwnByRange() will send first 5 characters of the hashed password(SHA1) to the api.
+
+The server responds with the suffix of every hash beginning with the specified prefix.
+
+The list from the server, is then checked to see if it includes the hashed password.
+
+This is known as [k-Anonymity model](https://en.wikipedia.org/wiki/K-anonymity).
+
+```java
+        String myPassword = "admin";
+        boolean pwned = PwnedPasswords.pwnByRange(myPassword);
         if(pwned){
             System.out.println( "Oh no — pwned!");
         }
