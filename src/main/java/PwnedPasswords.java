@@ -69,10 +69,21 @@ public class PwnedPasswords {
         return sb.toString();
     }
 
- /*   public static boolean pwnByRange(String password) throws NoSuchAlgorithmException, BadRequestException, IOException, UnknownResponseCode, RateLimitException {
-        String hashedPassword = hashPassword(password).toUpperCase();
-        String range = hashedPassword.substring(0, 5).toUpperCase();
-        //Note: The api is case insensitive.
+    /**
+     * Checks for hacked passwords using have I been pwned API.
+     * The password is hashed(SHA1) and then the first 5 characters sent to the API.
+     * The server responds with the suffix of every hash beginning with the specified prefix.
+     * The list is then checked to see if it includes the hashed password.
+     * This is known as k-Anonymity model.
+     * Read more about the project at https://haveibeenpwned.com/About
+     *
+     * @param password The password
+     * @return true if the password was found in the Pwned Passwords repository, false if  the password was not found in the Pwned Passwords repository.
+     */
+    public static boolean pwnByRange(String password) throws NoSuchAlgorithmException, BadRequestException, IOException, UnknownResponseCode, RateLimitException {
+        String hashedPassword = hashPassword(password);
+        String range = hashedPassword.substring(0, 5);
+        String suffix = hashedPassword.substring(5, hashedPassword.length());
 
         String URL = apiBaseURL + apiRangeURL + range;
         //Get request to get the range
@@ -97,9 +108,10 @@ public class PwnedPasswords {
             response.append(inputLine);
         }
         in.close();
-        String data = response.toString().toUpperCase();
-        return data.contains(hashedPassword);
-    }*/
+        //Note: The api is case insensitive.
+        String data = response.toString().toLowerCase();
+        return data.contains(suffix);
+    }
 
     private static int requestPwnStatus(String password) throws IOException {
         String URL = apiBaseURL + apiPwnedPasswordURL + password;
